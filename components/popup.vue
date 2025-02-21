@@ -1,13 +1,15 @@
 <template>
   <div>
- <!-- popup window -->
-        <div class="absolute bg-gray-400 border border-black" 
-            :style="{top: y + 'px', left: x + 'px', width: props.width + 'px', height: props.height + 'px'}" @mousedown="startDrag">
-            <div class="w-full h-8 bg-gray-600 flex items-center relative">
-                <p>POPUP WINDOW</p>
-                <button class="absolute top-1 right-2 transition-all hover:underline hover:text-red-500" @click="emit('close')">X</button>
-            </div>
-        </div>   
+    <!-- popup window -->
+    <div 
+        class="absolute bg-gray-400 border border-black" 
+        :style="{top: y + 'px', left: x + 'px', width: props.width + 'px', height: props.height + 'px'}" 
+        >
+        <div @mousedown="startDrag" class="w-full h-8 bg-gray-600 flex items-center relative" >
+            <p>POPUP WINDOW</p>
+            <button class="absolute top-1 right-2 transition-all hover:underline hover:text-red-500" @click="emit('close')">X</button>
+        </div>
+    </div>   
   </div>
 </template>
 
