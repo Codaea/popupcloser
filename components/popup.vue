@@ -1,8 +1,9 @@
 <template>
   <div>
  <!-- popup window -->
-        <div class="absolute" :style="{top: y + 'px', left: x + 'px', width: props.width + 'px', height: props.height + 'px',zIndex:z, backgroundColor: color }" @mousedown="startDrag">
+        <div class="absolute" :style="{top: y + 'px', left: x + 'px', width: props.width + 'px', height: props.height + 'px', backgroundColor: props.color}" @mousedown="startDrag">
             <p>POPUP WINDOW</p>
+            <button @click="emit('close')">Close</button>
         </div>   
   </div>
 </template>
@@ -17,13 +18,15 @@ const props = defineProps({
         type: Number,
         required: true
     },
-    z: {
-        type: Number,
-        required: true
-    },
     width: Number,
     height: Number,
+    color: {
+        type: String,
+        required: true
+    }
 })
+
+const emit = defineEmits(['close']);
 
 // x and y from props are only used to initialize the ref values
 const x = ref(props.x);
@@ -38,6 +41,7 @@ function startDrag(e: MouseEvent) {
     isDragging.value = true;
     offSetX.value = e.clientX - x.value;
     offSetY.value = e.clientY - y.value;
+
     window.addEventListener('mousemove', dragEl);
     window.addEventListener('mouseup', stopDrag);
 }
@@ -55,7 +59,4 @@ function dragEl(e: MouseEvent) {
     }
 }
 
-
-// random color
-const color = ref('#'+(Math.random()*0xFFFFFF<<0).toString(16));
 </script>
