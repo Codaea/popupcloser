@@ -2,7 +2,7 @@
     <!-- Screen + background -->
     <div class="w-screen h-screen bg-gray-100">
         <div v-for="popup in popups">
-            <Popup :x="popup.x" :y="popup.y"  :width="popup.width" :height="popup.height"/>
+            <Popup :x="popup.x" :y="popup.y" :z="popup.z" :width="popup.width" :height="popup.height"/>
         </div>
     </div>
 </template>
@@ -10,6 +10,7 @@
 interface Popup {
     x: number 
     y: number
+    z: number // z index
     width: number
     height: number
 }
@@ -22,7 +23,8 @@ for (let i = 0; i < 10; i++) {
         width: randIntInclusive(100, 500),
         height: randIntInclusive(100, 500),
         x: randIntInclusive(0, screenX),
-        y: randIntInclusive(0, screenY)
+        y: randIntInclusive(0, screenY),
+        z: i
     }
     popups.value.push(popup);
 }
